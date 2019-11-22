@@ -76,7 +76,7 @@
 
               <div class="row align-items-center justify-content-center">
                 <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-2 mb-lg-2">
-                  <button type="button" onclick="attemptLogin();" class="btn btn-primary btn-lg btn-block text-white btn-search">Iniciar sesión</button>
+                  <button id="login_button" type="button" onclick="attemptLogin();" class="btn btn-primary btn-lg btn-block text-white btn-search">Iniciar sesión</button>
                 </div>
               </div>
             </form>
@@ -186,6 +186,19 @@
 
 
       }
+    </script>
+
+    <script>
+      // When typing password, make "enter" key click the login button.
+      var input = document.getElementById("password_input");
+
+      input.addEventListener("keyup", function(event) {
+      // "Enter" is number 13.
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("login_button").click();
+      }
+      });
     </script>
 
 
