@@ -64,19 +64,19 @@
 
               <div class="row align-items-center justify-content-center">
                 <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-2 mb-lg-2">
-                  <input type="text" class="form-control form-control-lg" placeholder="Matrícula o nómina (A0.../L0...)">
+                  <input id="username_input" type="text" class="form-control form-control-lg" placeholder="Matrícula o nómina (A0.../L0...)">
                 </div>
               </div>
 
               <div class="row align-items-center justify-content-center">
                 <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-2 mb-lg-2">
-                  <input type="password" class="form-control form-control-lg" placeholder="Contraseña">
+                  <input id="password_input" type="password" class="form-control form-control-lg" placeholder="Contraseña">
                 </div>
               </div>
 
               <div class="row align-items-center justify-content-center">
                 <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-2 mb-lg-2">
-                  <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search">Iniciar sesión</button>
+                  <button type="button" onclick="attemptLogin();" class="btn btn-primary btn-lg btn-block text-white btn-search">Iniciar sesión</button>
                 </div>
               </div>
             </form>
@@ -168,6 +168,25 @@
     <script src="js/owl.carousel.min.js"></script>
 
     <script src="js/custom.js"></script>
+
+    <script>
+      function attemptLogin() {
+        let user = document.getElementById("username_input").value;
+        let pass = document.getElementById("password_input").value;
+
+        if (user.length == 0)
+          alert("Por favor introduzca su matrícula o nómina.");
+        else if (pass.length == 0)
+          alert("Por favor introduzca su contraseña.");
+        else if(user.match(/(A|L)0[0-9]{7}/gi) == null)
+          alert("El formato de la matrícula no es válido.\nUtilice el formato A0xxxxxxx o L0xxxxxxx.");
+        else
+          // Login successful. Redirect.
+          window.location.href = "contact.html";
+
+
+      }
+    </script>
 
 
   </body>
