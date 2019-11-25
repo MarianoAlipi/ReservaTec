@@ -41,7 +41,7 @@
           <nav class="mx-auto site-navigation">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
               <li><a href="index.html" class="nav-link">Inicio</a></li>
-              <li><a href="reservar.html" class="active">Reservar</a></li>
+              <li><a href="reservar.php" class="active">Reservar</a></li>
               <li class="d-lg-none"><a href="contact.html">Contacto</a></li>
             </ul>
           </nav>
@@ -112,7 +112,7 @@
           echo "<tr>";
           echo "<td>" . $row['edificio'] . "</td>";
           echo "<td>" . $row['numero'] . "</td>";
-		  echo "<td>" . $row['capacidad'] . "</td>";
+		      echo "<td>" . $row['capacidad'] . "</td>";
           echo "</tr>";
           }
           echo "</table>";
