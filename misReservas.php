@@ -41,8 +41,8 @@
           <nav class="mx-auto site-navigation">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
               <li><a href="index.html" class="nav-link">Inicio</a></li>
-              <li><a href="reservar.php" class="active">Reservar</a></li>
-              <li><a href="misReservas.php" class="nav-link">Mis reservas</a></li>
+              <li><a href="reservar.php" class="nav-link">Reservar</a></li>
+              <li><a href="misReservas.php" class="active">Mis reservas</a></li>
               <li class="d-lg-none"><a href="contact.html">Contacto</a></li>
             </ul>
           </nav>
@@ -68,8 +68,8 @@
         <div class="row align-items-center justify-content-center">
           <div class="col-md-12">
             <div class="mb-5 text-center">
-              <h1 class="text-white font-weight-bold">Reservar</h1>
-              <p>Encuentra un salón para tu evento en campus.</p>
+              <h1 class="text-white font-weight-bold">Mis reservas</h1>
+              <p>Tus reservaciones activas.</p>
             </div>
           </div>
         </div>
@@ -102,14 +102,23 @@
               echo "Failed to connect to MySQL: " . mysqli_connect_error();
               }
 
-              $result = mysqli_query($con,"SELECT * FROM rooms ORDER BY edificio, numero");
+              // WHERE rentas.userID = 7
+              $result = mysqli_query($con,"SELECT * FROM rentas INNER JOIN rooms ON rentas.idSalon = rooms.id WHERE rentas.userID = 7 ORDER BY edificio, numero");
 
-              echo "<table border='1' class='table table-sm table-hover'>
+              if (!$result) {
+                echo "<h2>No hay reservaciones activas.</h2>";
+                exit;
+              }
+
+              echo "<table border='1' class='table table-hover'>
               <tr class='table-primary'>
               <th>Edificio</th>
               <th>Número</th>
     		      <th>Capacidad</th>
+              <th>Fecha de inicio</th>
+              <th>Fecha de fin</th>
               </tr>";
+
 
               while($row = mysqli_fetch_array($result))
               {
@@ -122,80 +131,24 @@
 
               echo "<td>" . $row['numero'] . "</td>";
     		      echo "<td>" . $row['capacidad'] . "</td>";
+              echo "<td>" . $row['fechaInicio'] . "</td>";
+              echo "<td>" . $row['fechaFinal'] . "</td>";
               echo "</tr>";
               }
               echo "</table>";
 
               mysqli_close($con);
+
+              echo "<form method='post' action='cancel.php' class='search-jobs-form text-center'>
+                <button type='submit' class='btn btn-danger btn-lg btn-block text-white btn-search mt-2'>Cancelar</button>
+              </form>";
+
             ?>
+
+              
+
           </div>
         </div>
-
-
-        <!-- PHP form -->
-        <form method="post" action="insert.php" class="search-jobs-form text-center">
-
-              <h3>Reservar</h3>
-              <div class="row align-items-center justify-content-center">
-                <div class="col-4 mb-2">
-                  <input type="text" class="form-control form-control-lg" placeholder="Título del evento">
-                </div>
-              </div>
-
-              <div class="row align-items-center justify-content-center">
-                <div class="col-4 mb-2">
-                  <select class="form-control">
-                    <?php
-                      $con=mysqli_connect("localhost","root","","AMS");
-                      // Check connection
-                      if (mysqli_connect_errno())
-                      {
-                      echo "Failed to connect to MySQL: " . mysqli_connect_error();
-                      }
-
-                      $result = mysqli_query($con,"SELECT * FROM rooms ORDER BY edificio, numero");
-
-                      while($row = mysqli_fetch_array($result)) {
-                        echo "<option>";
-                        if ($row['edificio'] == "CIAP")
-                          echo "" . $row['edificio'];
-                        else
-                          echo "A" . $row['edificio'];
-
-                        echo "-" . $row['numero'] . "</option>";
-                        
-                      }
-
-                    ?>
-                  </select>
-                </div>
-              </div>
-
-                <div class="row align-items-center justify-content-center text-center">
-                  <div class="col-4 mb-2">
-                    <input type="date" class="form-control-lg mb-2" placeholder="Fecha"></input>
-                    <input type="time" class="form-control-lg mb-2" placeholder="Hora"></input>
-                    <select class="form-control">
-                      <option>0 horas 30 minutos</option>
-                      <option>1 hora 0 minutos</option>
-                      <option>1 hora 30 minutos</option>
-                      <option>2 horas 0 minutos</option>
-                      <option>2 horas 30 minutos</option>
-                      <option>3 horas 0 minutos</option>
-                    </select>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search mt-2">Reservar</button>
-                  </div>
-                </div>
-            </form>
-
-        <!-- Google Form -->
-        <div class="row mt-5 justify-content-center text-center">
-          <div class="col-10">
-              <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd3y43sF-jsktYRmbo7w0ozyTvlfdNKTq9xCBQ8nV6dWQssZA/viewform?embedded=true" width="900" height="1000" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
-          </div>
-        </div>
-
-      </div>
     </section>
 
     <footer class="site-footer">
