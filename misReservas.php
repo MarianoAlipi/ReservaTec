@@ -105,16 +105,14 @@
               // WHERE rentas.userID = 7
               $result = mysqli_query($con,"SELECT * FROM rentas INNER JOIN rooms ON rentas.idSalon = rooms.id WHERE rentas.userID = 7 ORDER BY edificio, numero");
 
-              /*
-              $row = mysqli_fetch_array($result);
-
-              if (!$row) {
+              if ($result->num_rows == 0) {
                 echo "<h2>No hay reservaciones activas.</h2>";
                 exit;
               }
-				*/
+				
               echo "<table border='1' class='table table-hover'>
               <tr class='table-primary'>
+              <th>Título</th>
               <th>Edificio</th>
               <th>Número</th>
     		      <th>Capacidad</th>
@@ -126,6 +124,8 @@
               while($row = mysqli_fetch_array($result))
               {
               echo "<tr>";
+
+              echo "<td>" . $row["title"] . "</td>";
 
               if ($row['edificio'] == "CIAP")
                 echo "<td>" . $row['edificio'] . "</td>";
