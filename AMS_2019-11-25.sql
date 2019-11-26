@@ -112,6 +112,8 @@ CREATE TABLE `rentas` (
   `fechaInicio` datetime DEFAULT NULL,
   `fechaFinal` datetime DEFAULT NULL,
   `userID` int(11) unsigned DEFAULT NULL,
+  `title` varchar(30) DEFAULT NULL,
+
   PRIMARY KEY (`id`),
   FOREIGN KEY (`userID`) REFERENCES `Users`(`id`),
   FOREIGN KEY (`idSalon`) REFERENCES `rooms`(`id`)

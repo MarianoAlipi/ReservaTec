@@ -137,14 +137,14 @@
 
               <h3>Reservar</h3>
               <div class="row align-items-center justify-content-center">
-                <div class="col-4 mb-2">
-                  <input type="text" class="form-control form-control-lg" placeholder="Título del evento">
+                <div class="col-4 col-sm-6 mb-2">
+                  <input name="title" type="text" class="form-control form-control-lg" placeholder="Título del evento">
                 </div>
               </div>
 
               <div class="row align-items-center justify-content-center">
-                <div class="col-4 mb-2">
-                  <select class="form-control">
+                <div class="col-4 col-sm-6 mb-2">
+                  <select name="classroom" class="form-control">
                     <?php
                       $con=mysqli_connect("localhost","root","","AMS");
                       // Check connection
@@ -172,16 +172,16 @@
               </div>
 
                 <div class="row align-items-center justify-content-center text-center">
-                  <div class="col-4 mb-2">
-                    <input type="date" class="form-control-lg mb-2" placeholder="Fecha"></input>
-                    <input type="time" class="form-control-lg mb-2" placeholder="Hora"></input>
-                    <select class="form-control">
-                      <option>0 horas 30 minutos</option>
-                      <option>1 hora 0 minutos</option>
-                      <option>1 hora 30 minutos</option>
-                      <option>2 horas 0 minutos</option>
-                      <option>2 horas 30 minutos</option>
-                      <option>3 horas 0 minutos</option>
+                  <div class="col-4 col-sm-6 mb-2">
+                    <input id="datepicker" name="date" type="date" class="form-control-lg mb-2 datepicker maxDateToday" placeholder="Fecha"></input>
+                    <input name="time" type="time" class="form-control-lg mb-2" placeholder="Hora"></input>
+                    <select name="duration" class="form-control">
+                      <option value="00:30">0 horas 30 minutos</option>
+                      <option value="01:00">1 hora 0 minutos</option>
+                      <option value="01:30">1 hora 30 minutos</option>
+                      <option value="02:00">2 horas 0 minutos</option>
+                      <option value="02:30">2 horas 30 minutos</option>
+                      <option value="03:00">3 horas 0 minutos</option>
                     </select>
                     <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search mt-2">Reservar</button>
                   </div>
@@ -189,14 +189,16 @@
             </form>
 
         <!-- Google Form -->
+        <!--
         <div class="row mt-5 justify-content-center text-center">
           <div class="col-10">
               <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd3y43sF-jsktYRmbo7w0ozyTvlfdNKTq9xCBQ8nV6dWQssZA/viewform?embedded=true" width="900" height="1000" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
           </div>
         </div>
-
+		-->
       </div>
     </section>
+
 
     <footer class="site-footer">
 
@@ -244,7 +246,6 @@
   <!-- <script src="js/bootstrap-select.min.js"></script> -->
 
   <script src="js/custom.js"></script>
-
 
 </body>
 
